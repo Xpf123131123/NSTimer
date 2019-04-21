@@ -15,6 +15,9 @@
 		4E4AC21C226B6A82000F810A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4AC21B226B6A82000F810A /* main.m */; };
 		4E4AC226226B6A82000F810A /* NSTimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4AC225226B6A82000F810A /* NSTimerTests.m */; };
 		4E4AC231226B6A82000F810A /* NSTimerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4AC230226B6A82000F810A /* NSTimerUITests.m */; };
+		4E4AC241226B6AB5000F810A /* NSTimer+Default.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4AC240226B6AB5000F810A /* NSTimer+Default.m */; };
+		4E4AC245226C1007000F810A /* NSTimer+Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4AC244226C1007000F810A /* NSTimer+Proxy.m */; };
+		4E4AC247226C382F000F810A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4E4AC246226C382F000F810A /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,11 @@
 		4E4AC22C226B6A82000F810A /* NSTimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NSTimerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E4AC230226B6A82000F810A /* NSTimerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSTimerUITests.m; sourceTree = "<group>"; };
 		4E4AC232226B6A82000F810A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E4AC23F226B6AB5000F810A /* NSTimer+Default.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Default.h"; sourceTree = "<group>"; };
+		4E4AC240226B6AB5000F810A /* NSTimer+Default.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Default.m"; sourceTree = "<group>"; };
+		4E4AC243226C1007000F810A /* NSTimer+Proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Proxy.h"; sourceTree = "<group>"; };
+		4E4AC244226C1007000F810A /* NSTimer+Proxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Proxy.m"; sourceTree = "<group>"; };
+		4E4AC246226C382F000F810A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +109,8 @@
 		4E4AC20B226B6A81000F810A /* NSTimer */ = {
 			isa = PBXGroup;
 			children = (
+				4E4AC242226C0FE0000F810A /* NSProxy */,
+				4E4AC23E226B6A87000F810A /* Block */,
 				4E4AC20C226B6A81000F810A /* AppDelegate.h */,
 				4E4AC20D226B6A81000F810A /* AppDelegate.m */,
 				4E4AC20F226B6A81000F810A /* ViewController.h */,
@@ -110,6 +120,7 @@
 				4E4AC217226B6A82000F810A /* LaunchScreen.storyboard */,
 				4E4AC21A226B6A82000F810A /* Info.plist */,
 				4E4AC21B226B6A82000F810A /* main.m */,
+				4E4AC246226C382F000F810A /* README.md */,
 			);
 			path = NSTimer;
 			sourceTree = "<group>";
@@ -130,6 +141,24 @@
 				4E4AC232226B6A82000F810A /* Info.plist */,
 			);
 			path = NSTimerUITests;
+			sourceTree = "<group>";
+		};
+		4E4AC23E226B6A87000F810A /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				4E4AC23F226B6AB5000F810A /* NSTimer+Default.h */,
+				4E4AC240226B6AB5000F810A /* NSTimer+Default.m */,
+			);
+			path = Block;
+			sourceTree = "<group>";
+		};
+		4E4AC242226C0FE0000F810A /* NSProxy */ = {
+			isa = PBXGroup;
+			children = (
+				4E4AC243226C1007000F810A /* NSTimer+Proxy.h */,
+				4E4AC244226C1007000F810A /* NSTimer+Proxy.m */,
+			);
+			path = NSProxy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +266,7 @@
 			files = (
 				4E4AC219226B6A82000F810A /* LaunchScreen.storyboard in Resources */,
 				4E4AC216226B6A82000F810A /* Assets.xcassets in Resources */,
+				4E4AC247226C382F000F810A /* README.md in Resources */,
 				4E4AC214226B6A81000F810A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,6 +294,8 @@
 			files = (
 				4E4AC211226B6A81000F810A /* ViewController.m in Sources */,
 				4E4AC21C226B6A82000F810A /* main.m in Sources */,
+				4E4AC245226C1007000F810A /* NSTimer+Proxy.m in Sources */,
+				4E4AC241226B6AB5000F810A /* NSTimer+Default.m in Sources */,
 				4E4AC20E226B6A81000F810A /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

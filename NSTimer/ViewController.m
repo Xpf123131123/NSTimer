@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#import "NSTimer+Default.h"
+
 @interface ViewController ()
 
 @end
@@ -16,7 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    [NSTimer defaultScheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        NSLog(@"%@", timer.fireDate);
+    }];
+
 }
 
 
