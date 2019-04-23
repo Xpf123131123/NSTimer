@@ -1,5 +1,7 @@
 # 补充一个使用dispatch source实现的定时器
 
+dispatch source实现的定时器，精度比NSTimerh要高，并且可以暂停、恢复与取消
+
 ```
 /**
  dispatch_source_t的实现定时器，每次间隔和定时完成均通过block回调
