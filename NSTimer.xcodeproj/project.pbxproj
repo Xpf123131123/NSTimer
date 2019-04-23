@@ -18,6 +18,7 @@
 		4E4AC241226B6AB5000F810A /* NSTimer+Default.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4AC240226B6AB5000F810A /* NSTimer+Default.m */; };
 		4E4AC245226C1007000F810A /* NSTimer+Proxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4AC244226C1007000F810A /* NSTimer+Proxy.m */; };
 		4E4AC247226C382F000F810A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4E4AC246226C382F000F810A /* README.md */; };
+		4E928358226E02C000F8633A /* GCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E928357226E02C000F8633A /* GCDTimer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		4E4AC243226C1007000F810A /* NSTimer+Proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Proxy.h"; sourceTree = "<group>"; };
 		4E4AC244226C1007000F810A /* NSTimer+Proxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Proxy.m"; sourceTree = "<group>"; };
 		4E4AC246226C382F000F810A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4E928356226E02C000F8633A /* GCDTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GCDTimer.h; sourceTree = "<group>"; };
+		4E928357226E02C000F8633A /* GCDTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GCDTimer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,7 @@
 		4E4AC20B226B6A81000F810A /* NSTimer */ = {
 			isa = PBXGroup;
 			children = (
+				4E928355226E029400F8633A /* GCD */,
 				4E4AC242226C0FE0000F810A /* NSProxy */,
 				4E4AC23E226B6A87000F810A /* Block */,
 				4E4AC20C226B6A81000F810A /* AppDelegate.h */,
@@ -159,6 +163,15 @@
 				4E4AC244226C1007000F810A /* NSTimer+Proxy.m */,
 			);
 			path = NSProxy;
+			sourceTree = "<group>";
+		};
+		4E928355226E029400F8633A /* GCD */ = {
+			isa = PBXGroup;
+			children = (
+				4E928356226E02C000F8633A /* GCDTimer.h */,
+				4E928357226E02C000F8633A /* GCDTimer.m */,
+			);
+			path = GCD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E928358226E02C000F8633A /* GCDTimer.m in Sources */,
 				4E4AC211226B6A81000F810A /* ViewController.m in Sources */,
 				4E4AC21C226B6A82000F810A /* main.m in Sources */,
 				4E4AC245226C1007000F810A /* NSTimer+Proxy.m in Sources */,

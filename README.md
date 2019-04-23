@@ -1,3 +1,143 @@
+# 补充一个使用dispatch source实现的定时器
+
+```
+/**
+ dispatch_source_t的实现定时器，每次间隔和定时完成均通过block回调
+
+ @param interval        定时器间隔
+ @param repeats         重复次数，0表示不重复，
+ @param intervalBlock   每个时间间隔的回调
+ @param completeBlock   完成后回调
+ @return                GCDTimer对象，可管理定时器状态，对其取消、暂停与恢复
+*/
++ (instancetype)timerWithInterval:(CGFloat)interval repeats:(NSInteger)repeats intervalBlock:(intervalBlock)intervalBlock completeBlock:(dispatch_block_t __nullable)completeBlock {
+
+    // __block
+    __block NSInteger count = repeats;
+
+    /**
+     生成一个dispatch source对象
+
+     type    dispatch source对象的使用类型，这里是定时器类型：DISPATCH_SOURCE_TYPE_TIMER
+     handle  传0
+     mask    传0
+     queue   线程，一般传全局异步线程
+    */
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(0, 0));
+    // 设置定时器属性，第一个参数是定时器对象，第二个是定时器开始执行时，延时的时间，第三个是定时器的间隔，第四个是定时器的精度误差
+    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, interval * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    // 设置定时器的回调函数
+    dispatch_source_set_event_handler(timer, ^{
+        // 记录剩余循环次数
+        count--;
+
+        if (count <= 0) {
+            // 取消定时器
+            dispatch_source_cancel(timer);
+            // 回到主线程
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 执行完成回调
+                completeBlock();
+            });
+        } else {
+            // 回到主线程
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 执行定时器回调，参数表示执行次数，从1开始
+                intervalBlock(repeats - count);
+            });
+        }
+    });
+    // 开始执行
+    dispatch_resume(timer);
+
+    // 生成一个实例对象
+    GCDTimer * gcdTimer = [GCDTimer new];
+    // 对dispatch_source_t的实例对象timer做一个强引用，不然timer会被释放，定时器就无法执行
+    gcdTimer.timer = timer;
+    // 返回实例对象
+    return gcdTimer;
+}
+```
+
+```
+#pragma mark ================定时器构造方法================
+/**
+ 无限循环的实现定时器, 默认时间间隔1.0s
+
+ @param intervalBlock   每个时间间隔的回调
+ @return                GCDTimer对象，可管理定时器状态，对其取消、暂停与恢复
+*/
++ (instancetype)timerWithIntervalBlock:(intervalBlock)intervalBlock;
+
+/**
+ 无限循环的实现定时器, 需要传入时间间隔, dispatch_source_t
+
+ @param interval        定时器间隔
+ @param intervalBlock   每个时间间隔的回调
+ @return                GCDTimer对象，可管理定时器状态，对其取消、暂停与恢复
+*/
++ (instancetype)timerWithInterval:(CGFloat)interval intervalBlock:(intervalBlock)intervalBlock;
+
+/**
+ 可自定义参数的实现定时器,需要传入时间间隔，循环次数，定时回调和完成回调, dispatch_source_t
+
+ @param interval        定时器间隔
+ @param repeats         重复次数，0表示不重复，
+ @param intervalBlock   每个时间间隔的回调
+ @param completeBlock   完成后回调
+ @return                GCDTimer对象，可管理定时器状态，对其取消、暂停与恢复
+*/
++ (instancetype)timerWithInterval:(CGFloat)interval repeats:(NSInteger)repeats intervalBlock:(intervalBlock)intervalBlock completeBlock:(dispatch_block_t __nullable)completeBlock;
+
+
+#pragma mark ================定时器状态================
+/**
+ 取消定时器
+*/
+- (void)cancel;
+
+/**
+ 暂停定时器
+*/
+- (void)suspend;
+
+/**
+ 恢复定时器
+*/
+- (void)resume;
+
+
+```
+
+```
+//    [GCDTimer timerWithIntervalBlock:^(NSUInteger currentInterval) {
+//
+//    }];
+
+//    GCDTimer * gcdTimer = [GCDTimer timerWithInterval:1 intervalBlock:^(NSUInteger currentInterval) {
+//        NSLog(@"%lu", currentInterval);
+//    }];
+
+    GCDTimer * gcdTimer = [GCDTimer timerWithInterval:1 repeats:30 intervalBlock:^(NSUInteger currentInterval) {
+        NSLog(@"%lu", currentInterval);
+    } completeBlock:^{
+        NSLog(@"111");
+    }];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [gcdTimer suspend]; // 暂停
+    });
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(9 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [gcdTimer resume]; // 恢复
+    });
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [gcdTimer cancel]; // 取消
+    });
+
+
+```
 
 # NSTimer
 ## 介绍
